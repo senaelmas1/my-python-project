@@ -36,10 +36,6 @@ jobs:
           # Add your test commands here
           echo "No tests defined" || true
 
-      - name: Test SonarQube connectivity
-        run: |
-          curl -v https://5dee-212-125-31-118.ngrok-free.app
-
       - name: Code Analysis (SonarQube)
         run: |
           docker run --rm \
@@ -52,10 +48,6 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Test Harbor registry connectivity
-        run: |
-          curl -v https://k8s-master-codecamp24.obss.io:30003/harbor/projects/2/repositories
 
       - name: Build Docker image
         run: |
@@ -71,4 +63,4 @@ jobs:
 
       - name: Push Docker image
         run: |
-          docker push k8s-master-codecamp24.obss.io:30003/codecamp/senaelmas-python-app:latest
+          docker push k8s-master-codecamp24.obss.io:30003/codecamp/senaelmas-python-app:latest 
