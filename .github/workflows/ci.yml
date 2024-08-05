@@ -1,3 +1,5 @@
+name: CI/CD Pipeline
+
 on:
   push:
     branches:
@@ -38,11 +40,11 @@ jobs:
         run: |
           docker run --rm \
             -e SONAR_TOKEN=${{ secrets.SONAR_TOKEN }} \
-            -v $(pwd):/usr/src \
+            -v ${{ github.workspace }}:/usr/src \
             -w /usr/src \
             sonarsource/sonar-scanner-cli:latest \
             -Dsonar.projectKey=my-python-project \
-            -Dsonar.host.url=http://192.168.210.47:9000 \
+            -Dsonar.host.url=https://abcd1234.ngrok.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -62,4 +64,3 @@ jobs:
       - name: Push Docker image
         run: |
           docker push k8s-master-codecamp24.obss.io:30003/codecamp/my-python-app:latest
-
