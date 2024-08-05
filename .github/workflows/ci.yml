@@ -44,22 +44,22 @@ jobs:
             -Dsonar.projectKey=my-python-project \
             -Dsonar.host.url=http://192.168.210.47:9000 \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build Docker image
         run: |
           docker build -t my-python-app .
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Log in to Harbor
+        run: |
+          echo "${{ secrets.HARBOR_PASSWORD }}" | docker login k8s-master-codecamp24.obss.io:30003 -u ${{ secrets.HARBOR_USERNAME }} --password-stdin
 
       - name: Tag Docker image
         run: |
-          docker tag my-python-app senaelmas1/my-python-app:latest
+          docker tag my-python-app k8s-master-codecamp24.obss.io:30003/codecamp/my-python-app:latest
 
       - name: Push Docker image
         run: |
-          docker push senaelmas1/my-python-app:latest
+          docker push k8s-master-codecamp24.obss.io:30003/codecamp/my-python-app:latest
 
