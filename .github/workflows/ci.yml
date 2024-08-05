@@ -51,7 +51,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t my-python-app .
+          docker build -t senaelmas-python-app .
 
       - name: Log in to Harbor
         run: |
@@ -59,8 +59,8 @@ jobs:
 
       - name: Tag Docker image
         run: |
-          docker tag my-python-app k8s-master-codecamp24.obss.io:30003/codecamp/my-python-app:latest
+          docker tag senaelmas-python-app k8s-master-codecamp24.obss.io:30003/codecamp/senaelmas-python-app:latest
 
       - name: Push Docker image
         run: |
-          docker push k8s-master-codecamp24.obss.io:30003/codecamp/my-python-app:latest
+          docker push k8s-master-codecamp24.obss.io:30003/codecamp/senaelmas-python-app:latest
