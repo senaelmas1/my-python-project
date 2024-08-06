@@ -44,7 +44,7 @@ jobs:
             -w /usr/src \
             sonarsource/sonar-scanner-cli:latest \
             -Dsonar.projectKey=my-python-project \
-            -Dsonar.host.url=https://2836-212-125-31-118.ngrok-free.app \
+            -Dsonar.host.url=https://c198-212-125-31-118.ngrok-free.app  \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
